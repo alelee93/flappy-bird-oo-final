@@ -1,0 +1,160 @@
+* {
+  margin: 0;
+  padding: 0;
+  /* height: 100%; */
+  /* overflow: hidden; */
+}
+
+body {
+  background-color: #ddd894;
+}
+
+.game-container {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+}
+
+.sky {
+  background-image: url("img/fb-game-background.png");
+  width: 100%;
+  height: 580px;
+  position: absolute;
+  background-repeat: repeat-x;
+}
+
+.obstacles {
+  position: absolute;
+  height: 580px;
+  width: 500px;
+  /* background-color: red; */
+}
+
+.bottomObstacle {
+  background-image: url("img/pipe-green.png");
+  width: 52px;
+
+  position: absolute;
+
+  left: 400px;
+  bottom: 0px;
+  height: 100px;
+  /* background-repeat: no-repeat; */
+  /* background-size: cover; */
+}
+
+.topObstacle {
+  background-image: url("img/pipe-green.png");
+  transform: rotate(180deg);
+  width: 52px;
+
+  position: absolute;
+
+  left: 400px;
+  height: 300px;
+}
+
+#colision {
+  background-image: url("img/pipe-red.png");
+  width: 52px;
+}
+
+.ground {
+  background-image: url("img/base.png");
+  width: 100%;
+  height: 112px;
+  position: absolute;
+  top: 578px;
+  background-repeat: repeat-x;
+  z-index: +1;
+}
+
+#moving {
+  background-image: url("img/base.png");
+  width: 100%;
+  height: 112px;
+  position: absolute;
+  top: 578px;
+  background-repeat: repeat-x;
+  z-index: +1;
+
+  animation: slideright 50s infinite linear;
+  -webkit-animation: slideright 50s infinite linear;
+}
+
+.bird {
+  background-image: url("img/yellowbird-downflap.png");
+  position: absolute;
+  height: 45px;
+  width: 60px;
+  z-index: +2;
+}
+
+#fly {
+  animation: fly 0.5s infinite;
+}
+
+#fall {
+  animation: fall 0.8s forwards;
+}
+
+#game-over {
+  background-image: url("img/gameover.png");
+  height: 42px;
+  width: 192px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: +1;
+  position: absolute;
+}
+
+.contador {
+  left: 45%;
+  top: 50px;
+
+  z-index: +1;
+  position: absolute;
+}
+
+@keyframes fly {
+  0%,
+  100% {
+    background-image: url("img/yellowbird-upflap.png");
+  }
+  33% {
+    background-image: url("img/yellowbird-midflap.png");
+  }
+  66% {
+    background-image: url("img/yellowbird-downflap.png");
+  }
+}
+
+@keyframes fall {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(50deg);
+    bottom: 0;
+  }
+}
+
+@keyframes slideright {
+  from {
+    background-position: 1000%;
+  }
+  to {
+    background-position: 0%;
+  }
+}
+
+@-webkit-keyframes slideright {
+  from {
+    background-position: 1000%;
+  }
+  to {
+    background-position: 0%;
+  }
+}
