@@ -4,7 +4,6 @@ const juego = {
   gravedad: 2,
   skyHeight: 580,
 
-
   aleatorio: function (min, max) {
     return Math.floor(Math.random() * (max - min + 1) + min);
   },
@@ -18,8 +17,9 @@ const juego = {
   loop: function () {
     bird.efectoGravedad();
     obstaculos.mover();
-    bird.dibujar() //nuevo
-    obstaculos.dibujar() //nuevo
+    bird.dibujar(); //nuevo
+    contador.dibujar(); //nuevo
+    obstaculos.dibujar(); //nuevo
     juego.verificaColision();
   },
 
@@ -27,7 +27,7 @@ const juego = {
     audio.crearAudio();
     document.addEventListener("keyup", bird.mover);
     obstaculos.crearObstaculo();
-    bird.dibujar();
+    // bird.dibujar();
     juego.timerObstaculos = setInterval(obstaculos.crearObstaculo, 3000);
     juego.timerId = setInterval(juego.loop, 20);
   },
@@ -60,19 +60,23 @@ const contador = {
   unidades: document.querySelector("#unidades"),
   decenas: document.querySelector("#decenas"),
   puntaje: 0,
+
+  dibujar: function () {
+    let digitos = contador.puntaje.toString().split("").reverse();
+
+    contador.unidades.src = "img/" + digitos[0] + ".png";
+
+    if (digitos.length > 1) {
+      contador.decenas.src = "img/" + digitos[1] + ".png";
+    }
+  },
+
   actualizarContador: function (parObstaculos) {
     if (bird.left == parObstaculos.left) {
       contador.puntaje += 1;
+      contador.dibujar();
       audio.effects.point.play();
       console.log("puntaje: " + contador.puntaje);
-
-      let digitos = contador.puntaje.toString().split("").reverse();
-
-      contador.unidades.src = "img/" + digitos[0] + ".png";
-
-      if (digitos.length > 1) {
-        contador.decenas.src = "img/" + digitos[1] + ".png";
-      }
     }
   },
 };
@@ -203,11 +207,13 @@ const obstaculos = {
     }
   },
 
-  dibujar: function() {
-    for (var i=0; i< obstaculos.lista.length; i++) {
-      obstaculos.lista[i].topObstacle.style.left = obstaculos.lista[i].left + "px";
-      obstaculos.lista[i].bottomObstacle.style.left = obstaculos.lista[i].left + "px";
-  
+  dibujar: function () {
+    for (var i = 0; i < obstaculos.lista.length; i++) {
+      obstaculos.lista[i].topObstacle.style.left =
+        obstaculos.lista[i].left + "px";
+      obstaculos.lista[i].bottomObstacle.style.left =
+        obstaculos.lista[i].left + "px";
+
       obstaculos.lista[i].topObstacle.style.height =
         obstaculos.lista[i].topObstacleHeight + "px";
       obstaculos.lista[i].bottomObstacle.style.height =
