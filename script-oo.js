@@ -26,9 +26,9 @@ const juego = {
   iniciar: function () {
     audio.crearAudio();
     document.addEventListener("keyup", bird.mover);
-    obstaculos.crearObstaculo();
+    obstaculos.crear();
     // bird.dibujar();
-    juego.timerObstaculos = setInterval(obstaculos.crearObstaculo, 3000);
+    juego.timerObstaculos = setInterval(obstaculos.crear, 3000);
     juego.timerId = setInterval(juego.loop, 20);
   },
 
@@ -71,10 +71,9 @@ const contador = {
     }
   },
 
-  actualizarContador: function (parObstaculos) {
+  actualizar: function (parObstaculos) {
     if (bird.left == parObstaculos.left) {
       contador.puntaje += 1;
-      contador.dibujar();
       audio.effects.point.play();
       console.log("puntaje: " + contador.puntaje);
     }
@@ -157,7 +156,7 @@ const obstaculos = {
   width: 52,
   lista: [],
 
-  crearObstaculo: function () {
+  crear: function () {
     const topObstacle = document.createElement("div");
     const bottomObstacle = document.createElement("div");
     topObstacle.classList.add("topObstacle");
@@ -184,11 +183,10 @@ const obstaculos = {
       topObstacleBottom: juego.skyHeight - topObstacleHeight,
       bottomObstacleBottom: 0,
     };
-    obstaculos.dibujar(parObstaculos);
     obstaculos.lista.push(parObstaculos);
   },
 
-  eliminarObstaculo: function (parObstaculos) {
+  eliminar: function (parObstaculos) {
     if (parObstaculos.left + obstaculos.width < 0) {
       parObstaculos.bottomObstacle.remove();
       parObstaculos.topObstacle.remove();
@@ -202,8 +200,8 @@ const obstaculos = {
       obstaculos.lista[i].left -= obstaculos.velocidad;
 
       // obstaculos.dibujar(obstaculos.lista[i]);
-      obstaculos.eliminarObstaculo(obstaculos.lista[i]);
-      contador.actualizarContador(obstaculos.lista[i]);
+      obstaculos.eliminar(obstaculos.lista[i]);
+      contador.actualizar(obstaculos.lista[i]);
     }
   },
 

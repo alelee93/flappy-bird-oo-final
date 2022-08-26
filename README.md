@@ -1,0 +1,12 @@
+- html
+- css
+- animations (css)
+- draw and move bird
+- gravity
+- create the pipes
+- draw the pipes
+- move the pipes
+- delete the pipes
+- collision detection
+- score
+- adding sounds
