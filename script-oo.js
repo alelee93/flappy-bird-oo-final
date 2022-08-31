@@ -24,7 +24,7 @@ const juego = {
   },
 
   iniciar: function () {
-    audio.crearAudio();
+    audio.crear();
     document.addEventListener("keyup", bird.mover);
     obstaculos.crear();
     // bird.dibujar();
@@ -233,7 +233,7 @@ const obstaculos = {
 const audio = {
   effects: {},
 
-  crearAudio: function () {
+  crear: function () {
     const wing = new Audio("audio/audio_wing.wav");
     audio.effects.wing = wing;
 
